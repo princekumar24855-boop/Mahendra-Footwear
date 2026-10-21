@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#F4F1EC"/>
+  <path d="M90 200C120 180 160 175 200 175C240 175 270 190 310 190C330 190 340 180 340 180C340 180 335 210 290 215C240 220 180 220 120 220C95 220 90 200 90 200Z" fill="#C9905C"/>
+  <path d="M100 185C110 140 145 110 200 110C240 110 265 140 280 170C250 170 220 160 180 160C140 160 115 180 100 185Z" fill="#9A3412"/>
+  <circle cx="165" cy="140" r="4" fill="#FDF8F3"/>
+  <circle cx="185" cy="140" r="4" fill="#FDF8F3"/>
+  <circle cx="205" cy="140" r="4" fill="#FDF8F3"/>
+  <text x="200" y="260" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#78716C" text-anchor="middle">Mahendra Footwear</text>
+</svg>

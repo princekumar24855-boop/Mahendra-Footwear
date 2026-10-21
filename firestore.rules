@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: check if caller is an authorized admin
+    function isAdmin() {
+      return request.auth != null && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        request.auth.token.admin == true
+      );
+    }
+
+    // Products Collection
+    match /products/{productId} {
+      // Public can read active products; admins can read all
+      allow read: if true;
+      // Only admins can write
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Shop Settings
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Admin Users Directory
+    match /admins/{adminId} {
+      allow read: if request.auth != null;
+      // First-time bootstrap: if no admin doc exists, authenticated user can create their own
+      allow write: if isAdmin() ||
+        (request.auth != null &&
+         request.auth.uid == adminId &&
+         !exists(/databases/$(database)/documents/admins/$(adminId)));
+    }
+  }
+}

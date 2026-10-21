@@ -1,0 +1,18 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Product Images folder
+    match /products/{imageId} {
+      // Public can view footwear product images
+      allow read: if true;
+
+      // Only authenticated admins can upload or delete product images
+      allow write: if request.auth != null
+                   && request.resource.size < 10 * 1024 * 1024 // 10MB limit
+                   && request.resource.contentType.matches('image/.*');
+      allow delete: if request.auth != null;
+    }
+  }
+}
