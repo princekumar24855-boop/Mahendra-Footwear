@@ -28,9 +28,14 @@ function MainApp() {
   const { addProduct, updateProduct, deleteProduct } = useProducts();
 
   // Navigation State
-  const [isAdminView, setIsAdminView] = useState(() => {
-    return window.location.pathname.startsWith('/admin') || window.location.hash.includes('admin');
-  });
+  // Default is always Customer Portal unless URL explicitly has /admin or #admin
+  const checkIsAdminPath = () => {
+    const path = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+    return path === '/admin' || path.startsWith('/admin/') || hash === '#admin' || hash.startsWith('#admin/');
+  };
+
+  const [isAdminView, setIsAdminView] = useState(checkIsAdminPath);
 
   const [adminTab, setAdminTab] = useState('overview'); // 'overview' | 'products' | 'settings'
 
@@ -47,8 +52,7 @@ function MainApp() {
   // Handle browser popstate / URL updates
   useEffect(() => {
     const handlePopState = () => {
-      const isAdm = window.location.pathname.startsWith('/admin') || window.location.hash.includes('admin');
-      setIsAdminView(isAdm);
+      setIsAdminView(checkIsAdminPath());
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
