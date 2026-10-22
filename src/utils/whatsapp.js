@@ -37,17 +37,18 @@ export function generateProductWhatsAppLink({
   const totalPrice = unitPrice * Number(quantity);
 
   const messageLines = [
-    `Hello Mahendra Footwear!`,
-    `I want to order the following product:`,
+    `नमस्ते महेन्द्र फुटवियर (Mahendra Footwear)! 🙏`,
+    `मुझे यह जूता/चप्पल ऑर्डर करना है:`,
     ``,
-    `Product: ${product.name}`,
-    `Category: ${product.category}`,
-    `Price: ${formatCurrency(unitPrice)}`,
-    size ? `Size: ${size}` : null,
-    `Quantity: ${quantity}`,
-    `Total: ${formatCurrency(totalPrice)}`,
+    `👟 Product: ${product.name}`,
+    `📂 Category: ${product.category}`,
+    `💰 Price: ${formatCurrency(unitPrice)}`,
+    size ? `📏 Size (नंबर): ${size}` : null,
+    `🔢 Quantity (जोड़ी): ${quantity}`,
+    `💵 Total Amount: ${formatCurrency(totalPrice)}`,
     ``,
-    `Please confirm availability and delivery details.`,
+    `📍 Delivery Address: Badi Bazar, Nasriganj या होम डिलीवरी उपलब्ध है?`,
+    `कृपया उपलब्धता और डिलीवरी की पुष्टि करें। धन्यवाद!`
   ].filter(line => line !== null);
 
   const text = messageLines.join('\n');
@@ -95,15 +96,15 @@ export function generateCartWhatsAppLink({
   const totalQuantity = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
 
   const messageLines = [
-    `Hello Mahendra Footwear!`,
-    `I would like to place an order for the following items:`,
+    `नमस्ते महेन्द्र फुटवियर (Mahendra Footwear)! 🙏`,
+    `मुझे नीचे दिए गए सामान का ऑर्डर करना है:`,
     ``,
     ...itemsList,
     ``,
-    `Total Items: ${totalQuantity}`,
-    `Grand Total: ${formatCurrency(grandTotal)}`,
+    `📦 Total Pairs (कुल जोड़ी): ${totalQuantity}`,
+    `💵 Grand Total (कुल कीमत): ${formatCurrency(grandTotal)}`,
     ``,
-    `Please confirm availability and delivery details.`,
+    `कृपया उपलब्धता और डिलीवरी की पुष्टि करें। धन्यवाद!`
   ];
 
   const text = messageLines.join('\n');
@@ -125,8 +126,8 @@ export function generateGeneralEnquiryWhatsAppLink(whatsappNumber, subject = '')
   if (!cleanNumber) return { isValid: false, url: '' };
 
   const message = subject
-    ? `Hello Mahendra Footwear! I have an enquiry regarding ${subject}.`
-    : `Hello Mahendra Footwear! I have an enquiry about your footwear collection.`;
+    ? `नमस्ते महेन्द्र फुटवियर! 🙏 मुझे ${subject} के बारे में जानकारी और ऑर्डर करना है।`
+    : `नमस्ते महेन्द्र फुटवियर! 🙏 मुझे आपके दुकान से जूते/चप्पल देखने और ऑर्डर करने हैं।`;
 
   return {
     isValid: true,
